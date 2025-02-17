@@ -24,35 +24,32 @@ cmake_minimum_required(VERSION 3.29)
 # Include generated *.pb.h files
 
 # add the ../proto directory to the include path
-set(PROTO_DIR "${CMAKE_SOURCE_DIR}/proto")
-message(STATUS "proto dir is ${PROTO_DIR}")
-
-
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/proto)
-set(source_files
-        ../proto/workspace.grpc.pb.cc
-        ../proto/workspace.pb.cc
-        ../proto/workspace.pb.h
-        ../proto/workspace.grpc.pb.h
-        ../include/WorkspaceServiceImpl.cpp
-        ../include/WorkspaceServiceImpl.h
-)
-add_library(
-        s2m_workspace_proto
-        ${source_files}
-)
+#set(PROTO_DIR "${CMAKE_SOURCE_DIR}/proto")
+#message(STATUS "proto dir is ${PROTO_DIR}")
+#
+#
+#include_directories(${CMAKE_CURRENT_BINARY_DIR}/proto)
+#set(source_files
+#        ../proto/workspace.grpc.pb.cc
+#        ../proto/workspace.pb.cc
+#        ../proto/workspace.pb.h
+#        ../proto/workspace.grpc.pb.h
+#        ../include/WorkspaceServiceImpl.cpp
+#        ../include/WorkspaceServiceImpl.h
+#)
+#add_library(
+#        s2m_workspace_proto
+#        ${source_files}
+#)
 
 # Main server executable
 add_executable(s2m_workspace
         main.cpp
-        ${source_files}
-        ../include/WorkspaceServiceImpl.cpp
-        ../include/WorkspaceServiceImpl.h
-
-
+#        ${source_files}
+#        ../include/WorkspaceServiceImpl.cpp
+#        ../include/WorkspaceServiceImpl.h
 )
 target_link_libraries(s2m_workspace
-        s2m_workspace_proto
         ${_REFLECTION}
         ${_GRPC_GRPCPP}
         ${_PROTOBUF_LIBPROTOBUF}
