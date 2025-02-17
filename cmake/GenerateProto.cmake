@@ -23,7 +23,10 @@ set(PROTO_DIR "${CMAKE_SOURCE_DIR}/proto")
 file(MAKE_DIRECTORY ${PROTO_BINARY_DIR})
 
 # Define the proto files
-set(PROTO_FILES "${PROTO_DIR}/workspace.proto")
+set(PROTO_FILES
+        "${PROTO_DIR}/workspace.proto"
+        "${PROTO_DIR}/helloworld.proto"
+)
 # Generate C++ source files from proto
 set(grpc_cpp_plugin_location $<TARGET_FILE:grpc_cpp_plugin>)
 message(STATUS "grpc_cpp_plugin is ${grpc_cpp_plugin_location}")
@@ -35,6 +38,7 @@ protobuf_generate(
 #        PLUGIN "protoc-gen-grpc=$<TARGET_FILE:grpc_cpp_plugin>"
         IMPORT_DIRS "${PROTO_DIR}"
         PROTOC_OUT_DIR "${PROTO_BINARY_DIR}"
+        PROTOS ${PROTO_FILES}
 )
 
 protobuf_generate(
@@ -44,6 +48,7 @@ protobuf_generate(
         PLUGIN "protoc-gen-grpc=$<TARGET_FILE:grpc_cpp_plugin>"
         IMPORT_DIRS "${PROTO_DIR}"
         PROTOC_OUT_DIR "${PROTO_BINARY_DIR}"
+        PROTOS ${PROTO_FILES}
 )
 
 message(STATUS "proto Object is ${CMAKE_SOURCE_DIR}/proto/workspace.proto")
